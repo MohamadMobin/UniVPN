@@ -39,16 +39,25 @@ wget https://github.com/fatedier/frp/releases/download/v0.56.0/frp_0.56.0_linux_
 tar -xvf frp_0.56.0_linux_amd64.tar.gz
 sudo cp frp_0.56.0_linux_amd64/frps /usr/local/bin/
 sudo mkdir -p /etc/frp
+```
 
 # ۲. ایجاد فایل کانفیگ FRPS
+```
 sudo tee /etc/frp/frps.toml > /dev/null <<EOF
+
+```
+```
 bindPort = 7000
 auth.method = "token"
 auth.token = "YOUR_SECURE_TOKEN"
 EOF
-
+```
 # ۳. ایجاد سرویس خودکار و باز کردن پورت‌ها
+```
 sudo tee /etc/systemd/system/frps.service > /dev/null <<EOF
+
+```
+```
 [Unit]
 Description=FRP Server
 After=network.target
@@ -62,34 +71,44 @@ RestartSec=5s
 [Install]
 WantedBy=multi-user.target
 EOF
+```
 
+```
 sudo systemctl daemon-reload
 sudo systemctl enable --now frps
 sudo ufw allow 7000/tcp
 sudo ufw allow 7001/tcp
 
+```
 ---
 
 ## 🏢 فاز ۲: راه‌اندازی سرور محلی (Local Node در دانشگاه)
 **پیش‌نیاز:** یک مینی‌کامپیوتر (مثل Raspberry Pi) یا سیستم لینوکسی متصل به شبکه دانشگاه. *(در صورت وجود Captive Portal، ابتدا با یک اسکریپت پایتون/Curl لاگین خودکار را تنظیم کنید).*
 
 **۱. نصب پنل 3x-ui:**
-bash
+```bash
 bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+```
 > 💡 *پس از نصب، وارد پنل وب شوید و یک کانفیگ **VLESS-Reality** روی پورت `$8443$` بسازید (نکات مربوط به SNI در فاز ۴ مطالعه شود).*
 
 **۲. نصب FRPC (کلاینت تونل) و WARP:**
 *(کد زیر برای معماری ARM64 مثل رزبری‌پای است. برای سیستم‌های معمولی `arm64` را به `amd64` تغییر دهید. مقادیر IP سرور ابری و TOKEN را جایگزین کنید).*
 
-bash
 # دانلود و نصب FRP
+
+```bash
 wget https://github.com/fatedier/frp/releases/download/v0.56.0/frp_0.56.0_linux_arm64.tar.gz
 tar -xvf frp_0.56.0_linux_arm64.tar.gz
 sudo cp frp_0.56.0_linux_arm64/frpc /usr/local/bin/
 sudo mkdir -p /etc/frp
-
+```
 # ایجاد کانفیگ FRPC
+```
 sudo tee /etc/frp/frpc.toml > /dev/null <<EOF
+
+```
+
+```
 serverAddr = "IP_سرور_ابری_شما"
 serverPort = 7000
 auth.method = "token"
@@ -102,9 +121,13 @@ localIP = "127.0.0.1"
 localPort = 8443
 remotePort = 7001
 EOF
-
+```
 # ایجاد سرویس FRPC
+```
 sudo tee /etc/systemd/system/frpc.service > /dev/null <<EOF
+
+```
+```
 [Unit]
 Description=FRP Client
 After=network.target
@@ -118,19 +141,26 @@ RestartSec=5s
 [Install]
 WantedBy=multi-user.target
 EOF
-
+```
+```
 sudo systemctl daemon-reload
 sudo systemctl enable --now frpc
 
-# نصب و تنظیم WARP (دور زدن تحریم‌ها)
+```
+
+# نصب و تنظیم WARP(دور زدن تحریم‌ها)
+```
 curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
 sudo apt update && sudo apt install cloudflare-warp -y
 
+```
+```
 warp-cli registration new
 warp-cli mode proxy
 warp-cli port 40000
 warp-cli connect
+```
 > 💡 *در نهایت، در پنل `3x-ui` یک Outbound از نوع SOCKS با آدرس `127.0.0.1` و پورت `$40000$` ایجاد کرده و روتینگ را به آن هدایت کنید.*
 
 ---
