@@ -1,1 +1,16 @@
+# تنظیمات نمونه برای کلاینت FRP
+serverAddr = "IP_SERVER"
+serverPort = 7000
+
+#این بخش تنها برای افزایش امنیت است و الزامی نیست
+[auth]
+method = "token"
+token = "YOUR_SECURE_TOKEN_HERE"
+
+[[proxies]]
+name = "xray-tcp"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 2053
+remotePort = 2053
 
