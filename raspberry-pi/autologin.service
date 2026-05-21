@@ -1,0 +1,15 @@
+[Unit]
+Description=University Auto Login Script
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/auto_login.py
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
