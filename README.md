@@ -1,11 +1,10 @@
 # 🌐 Secure Network Bridge (Architecture & Concepts)
 
-<p align="center">
-  ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-  ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Raspberry%20Pi-lightgrey)
-  ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-  ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-</p>
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Raspberry%20Pi-lightgrey)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
 
 این ریپازیتوری شامل کدهای اجرایی برای کلون کردن نیست؛ بلکه یک **معماری مفهومی و فاز به فاز** برای انتقال شبکه است. هدف از نگارش این مستند، ارائه ایده و مسیر پیاده‌سازی به توسعه‌دهندگان است تا بتوانند بر اساس نیاز و محدودیت‌های شبکه خود، از تمام یا بخشی از این فازها استفاده کنند یا آن‌ها را بهبود ببخشند.
 
