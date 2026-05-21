@@ -1,1 +1,13 @@
+# تنظیمات نمونه برای سرور FRP
 bindPort = 7000
+kcpBindPort = 7000
+
+#این بخش تنها برای افزایش امنیت است و الزامی نیست
+[auth]
+method = "token" 
+token = "YOUR_SECURE_TOKEN_HERE" #باید با آنچه که در کلاینت وارد شده یکسان باشد
+
+[webServer]
+port = 7500
+user = "admin"
+password = "admin_password"
