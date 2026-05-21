@@ -1,19 +1,20 @@
-# 🌐 Secure Network Bridge (Architecture & Concepts)
+# 🌉 Secure Network Bridge (Architecture & Concepts)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Raspberry%20Pi-lightgrey)
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![FRP](https://img.shields.io/badge/FRP-v0.56.0-brightgreen.svg)
+![Xray](https://img.shields.io/badge/Xray-Core-purple.svg)
+![WARP](https://img.shields.io/badge/WARP-Cloudflare-orange.svg)
 
-
-این ریپازیتوری شامل کدهای اجرایی برای کلون کردن نیست؛ بلکه یک **معماری مفهومی و فاز به فاز** برای انتقال شبکه است. هدف از نگارش این مستند، ارائه ایده و مسیر پیاده‌سازی به توسعه‌دهندگان است تا بتوانند بر اساس نیاز و محدودیت‌های شبکه خود، از تمام یا بخشی از این فازها استفاده کنند یا آن‌ها را بهبود ببخشند.
+این ریپازیتوری شامل کدهای اجرایی برای کلون کردن نیست؛ بلکه یک **معماری مفهومی و فاز به فاز** برای انتقال شبکه است. هدف از نگارش این مستند، ارائه ایده و مسیر پیاده‌سازی به توسعه‌دهندگان است تا بتوانند بر اساس امکانات و توانایی، نیازها و محدودیت‌های شبکه خود، از تمام یا بخشی از این فازها استفاده کنند یا آن‌ها را بهبود ببخشند.
 
 ## 🎯 هدف پروژه
 هدف اصلی این معماری، انتقال اینترنت‌های خاص (بدون فیلتر یا با محدودیت‌های کمتر) از داخل شبکه‌های دانشگاهی یا سازمانی، به فضای بیرون (برای دوستان و اطرافیانی که دسترسی آزادی به اینترنت ندارند) است. این ایده در راستای اشتراک‌گذاری منابع و دسترسی همگانی به اینترنت آزاد طراحی شده است.
 
 ---
 
-## 🏗 معماری و فازهای پروژه
+##📐 معماری و فازهای پروژه
 
 شما می‌توانید هر یک از این فازها را باتوجه به امکانات و توانایی‌های فردی در پروژه خود استفاده، جایگزین یا بهینه‌سازی کنید.
 
@@ -51,18 +52,18 @@
       │
       ▼  [ارتباط رمزنگاری شده VLESS / Reality]
       │
-🚪 Port: 8443
+🚪 Port: تعیین شده در سرور ابری
 🇮🇷 Iran Cloud Server (Relay / Edge Node)
       │
-      ▼  [تونل معکوس FRP - پورت 7001]
+      ▼  [تونل معکوس FRP بر روی پورت تعیین شده]
       │
 🛡️ University Firewall / NAT (Bypassed via Reverse Proxy)
       │
       ▼  [دریافت ترافیک توسط FRP Client]
       │
-🍓 Raspberry Pi 400 (Local Node in University)
+🍓 Raspberry Pi (Local Node in University)
       │
-      ▼  [ارسال به Inbound Xray - پورت 10085]
+      ▼  [ارسال به Inbound Xray]
       │
 🌍 Free International Internet (Target)
 ```
