@@ -1,11 +1,12 @@
 # 🌉 Secure Network Bridge (Architecture & Concepts)
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-![FRP](https://img.shields.io/badge/FRP-v0.56.0-brightgreen.svg)
-![Xray](https://img.shields.io/badge/Xray-Core-purple.svg)
-![WARP](https://img.shields.io/badge/WARP-Cloudflare-orange.svg)
+<p align="center">
+  <img src="https://img.shields.io/badge/Tunnel-FRP-0073B8?style=flat-square" alt="FRP" />
+  <img src="https://img.shields.io/badge/Tunnel-WireGuard-881798?style=flat-square&logo=wireguard" alt="WireGuard" />
+  <img src="https://img.shields.io/badge/Proxy_Core-Xray-000000?style=flat-square" alt="Xray" />
+  <img src="https://img.shields.io/badge/Upstream-Cloudflare_WARP-F38020?style=flat-square&logo=cloudflare" alt="Cloudflare WARP" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT" />
+</p>
 
 این ریپازیتوری شامل کدهای اجرایی برای کلون کردن نیست؛ بلکه یک **معماری مفهومی و فاز به فاز** برای انتقال شبکه است. هدف از نگارش این مستند، ارائه ایده و مسیر پیاده‌سازی به توسعه‌دهندگان است تا بتوانند بر اساس امکانات و توانایی، نیازها و محدودیت‌های شبکه خود، از تمام یا بخشی از این فازها استفاده کنند یا آن‌ها را بهبود ببخشند.
 
@@ -20,7 +21,7 @@
 
 ### فاز $1$: اتصال و احراز هویت خودکار (Local Node)
 در شبکه‌های سازمانی، معمولاً دسترسی به اینترنت نیازمند لاگین در Captive Portal است. 
-*   **ایده:** استفاده از یک مینی‌کامپیوتر (مانند Raspberry Pi) یا کامپیوترهای قدیمی رهاشده در داخل شبکه سازمان که با یک اسکریپت پایتون (یا دیگر زبان‌ها)، وضعیت اینترنت را چک کرده و در صورت قطعی، درخواست لاگین (HTTP POST) را به صورت خودکار ارسال می‌کند.
+*   **ایده:** استفاده از یک مینی‌کامپیوتر (مانند Raspberry Pi) یا کامپیوترهای ویندوزی قدیمی رهاشده در داخل شبکه سازمان/دانشگاه که با یک اسکریپت پایتون (یا دیگر زبان‌ها)، وضعیت اینترنت را چک کرده و در صورت قطعی، درخواست لاگین (HTTP POST) را به صورت خودکار ارسال می‌کند.
 
 ### فاز ۲: دور زدن فایروال و NAT با تونل معکوس (Reverse Tunneling)
 از آنجا که مینی‌کامپیوتر (رزبری‌پای) در شبکه داخلی سازمان قرار دارد، **فاقد آی‌پی پابلیک (Public IP)** است و مستقیماً پشت $NAT$ و فایروال سازمان قرار گرفته است؛ بنابراین هیچ کلاینتی از بیرون نمی‌تواند مستقیماً به آن متصل شود.
@@ -41,7 +42,7 @@
 
 ## ⚙️ پیاده‌سازی عملی و مسیر جریان داده (Data Flow)
 
-برای درک بهتر معماری، در اینجا یک نمونه پیاده‌سازی موفق از این الگو (Case Study) آورده شده است. در این سناریو، یک دستگاه **Raspberry Pi 400** در شبکه دانشگاه (با دسترسی به اینترنت آزاد) قرار گرفته و هسته Xray (پروتکل `VLESS + XTLS-Reality`) روی آن نصب شده است. 
+برای درک بهتر معماری، در اینجا یک نمونه پیاده‌سازی موفق از این الگو (Case Study) آورده شده است. در این سناریو، یک دستگاه **Raspberry Pi** در شبکه دانشگاه (با دسترسی به اینترنت آزاد) قرار گرفته و هسته Xray (پروتکل `VLESS + XTLS-Reality`) روی آن نصب شده است. 
 
 از آنجا که رزبری‌پای آی‌پی پابلیک ندارد و پشت فایروال سازمان قرار گرفته است، با استفاده از ابزار **FRP** یک تونل معکوس (Reverse Tunnel) به یک سرور ابری ایران (به عنوان سرور لبه/واسط) برقرار شده است. کلاینت‌ها به جای اتصال مستقیم به دانشگاه، به سرور ایران متصل می‌شوند و ترافیک آن‌ها از طریق تونل به رزبری‌پای هدایت می‌شود.
 
