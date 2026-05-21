@@ -1,0 +1,14 @@
+[Unit]
+Description=FRP Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+# مسیر را با مسیر پوشه frp خود جایگزین کنید
+ExecStart=/etc/frp/frps -c /etc/frp/frps.toml
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
