@@ -7,6 +7,7 @@ serverPort = 7000
 method = "token"
 token = "YOUR_SECURE_TOKEN_HERE"
 
+#برای دسترسی به پنل 3x-ui
 [[proxies]]
 name = "xray-tcp"
 type = "tcp"
