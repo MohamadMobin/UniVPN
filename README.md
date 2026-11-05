@@ -427,5 +427,3 @@ This project is distributed under the **MIT License**. See the `LICENSE` file fo
 *Built with curiosity, engineering, and a commitment to open connectivity.*
 
 </div>
-```
-
