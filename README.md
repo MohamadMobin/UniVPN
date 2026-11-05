@@ -42,8 +42,29 @@ This architecture is designed for environments where:
 
 - Local devices operate behind NAT, an institutional firewall, or a captive portal.
 - External users cannot establish direct connections to devices inside the local network.
-- There is a need to share a secure upstream network connection with authorized users.
+### Operational Model
 
+The deployment scenario this architecture is designed for is as follows:
+
+- An organization (company, university, or institution) provides internet
+  access to its internal network through authenticated accounts (e.g.,
+  student or staff accounts), often with a monthly or daily data quota
+  and a captive portal login.
+- The goal is to make this upstream internet connectivity available to
+  **authorized external users** — for example, students or colleagues
+  who are outside the organizational network — through a secure bridge.
+- The local node (Raspberry Pi) authenticates against the organizational
+  captive portal using an account provisioned for this purpose, monitors
+  the account's quota and connection status, and re-authenticates
+  automatically when the session drops or the quota is renewed.
+- External clients connect to the public relay and are routed through
+  the tunnel to the local Xray proxy, which egresses through the
+  organizational internet connection.
+
+> **Important:** Using an organizational internet account to provide
+> connectivity to external users consumes that account's quota and may be
+> subject to the organization's acceptable-use policy. Ensure you have
+> explicit authorization for this usage pattern before deploying.
 ---
 
 ## Design Principles
@@ -328,19 +349,20 @@ UniVPN/
 ├── iran-server/
 │   ├── README.md
 │   ├── frps.toml
-│   └── firewall.rules
+│   └── firewall.rules +
 │
 ├── raspberry-pi/
 │   ├── README.md
+│   ├── auto_login.py
+│   ├── autologin.service
 │   ├── frpc.toml
 │   ├── xray-config.json
-│   ├── captive-portal.py
-│   └── power-optimize.sh
+│   └── power-optimize.sh +
 │
 └── docs/
-    ├── architecture.md
-    ├── power-optimization.md
-    └── maintenance.md
+    ├── architecture.md +
+    ├── power-optimization.md +
+    └── maintenance.md +
 ```
 
 - `iran-server/`: Configuration examples for the public cloud relay server.
